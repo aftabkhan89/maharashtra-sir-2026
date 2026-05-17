@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maharashtra SIR 2026 Timeline</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #FF9933 0%, #ffffff 50%, #138808 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #1a1a1a;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+  }
+  
+  .header {
+    background: linear-gradient(135deg, #1a3a8e 0%, #2c5fc7 100%);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 120%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+  
+  .header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .header .subtitle {
+    font-size: 1rem;
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .header .badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+  
+  .header .badge:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  .flag-strip {
+    display: flex;
+    flex-direction: column;
+    width: 90px;
+    height: 60px;
+    margin: 0 auto 20px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+  }
+  
+  .flag-strip:hover {
+    transform: scale(1.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+  
+  .flag-saffron, .flag-white, .flag-green {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flag-saffron { background: #FF9933; }
+  .flag-white { background: #FFFFFF; }
+  .flag-green { background: #138808; }
+  
+  .ashoka-chakra {
+    width: 16px;
+    height: 16px;
+    animation: spin 12s linear infinite;
+    display: block;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .intro {
+    padding: 25px 30px;
+    background: #f8f9fc;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .intro h2 {
+    color: #1a3a8e;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .intro p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #4b5563;
+  }
+  
+  .timeline-wrapper {
+    padding: 30px;
+    position: relative;
+  }
+  
+  .progress-bar {
+    background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 100%);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 2px solid #fecaca;
+    transition: all 0.3s ease;
+  }
+  
+  .progress-bar:hover {
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  .progress-label {
+    font-weight: 600;
+    color: #991b1b;
+    font-size: 0.9rem;
+  }
+  
+  .countdown {
+    background: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+  
+  .countdown:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(220, 38, 38, 0.5);
+  }
+  
+  .timeline {
+    position: relative;
+    padding-left: 50px;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 22px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, 
+      #3b82f6 0%, 
+      #8b5cf6 25%, 
+      #ec4899 50%, 
+      #f59e0b 75%, 
+      #10b981 100%);
+    border-radius: 2px;
+  }
+  
+  .step {
+    position: relative;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 0.6s ease forwards;
+  }
+  
+  .step:nth-child(1) { animation-delay: 0.1s; }
+  .step:nth-child(2) { animation-delay: 0.2s; }
+  .step:nth-child(3) { animation-delay: 0.3s; }
+  .step:nth-child(4) { animation-delay: 0.4s; }
+  .step:nth-child(5) { animation-delay: 0.5s; }
+  .step:nth-child(6) { animation-delay: 0.6s; }
+  .step:nth-child(7) { animation-delay: 0.7s; }
+  
+  @keyframes slideIn {
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  .step-icon {
+    position: absolute;
+    left: -42px;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 4px solid white;
+    z-index: 2;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .step:hover .step-icon {
+    transform: scale(1.2) rotate(10deg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+  
+  .step-content {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border-left: 4px solid;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .step-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+  }
+  
+  .step-content:hover::after {
+    left: 100%;
+  }
+  
+  .step-content:hover {
+    transform: translateY(-4px) translateX(4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+  
+  .step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  
+  .step-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    transition: color 0.3s ease;
+  }
+  
+  .step-content:hover .step-title {
+    color: #1a3a8e;
+  }
+  
+  .step-date {
+    background: #f3f4f6;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+  
+  .step-content:hover .step-date {
+    background: #1a3a8e;
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  .step-description {
+    color: #4b5563;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  .step-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fef3c7;
+    color: #92400e;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .step-content:hover .step-action {
+    transform: translateX(4px);
+  }
+  
+  .step-action.critical {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+  
+  .step-action.done {
+    background: #d1fae5;
+    color: #065f46;
+  }
+  
+  .action-link {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 2px;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  
+  .action-link:hover {
+    text-decoration-thickness: 2.5px;
+    transform: translateY(-1px);
+    filter: brightness(1.2);
+  }
+  
+  .step-1 .step-icon { background: linear-gradient(135deg, #3b82f6, #1e40af); }
+  .step-1 .step-content { border-left-color: #3b82f6; }
+  
+  .step-2 .step-icon { background: linear-gradient(135deg, #6366f1, #4338ca); }
+  .step-2 .step-content { border-left-color: #6366f1; }
+  
+  .step-3 .step-icon { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+  .step-3 .step-content { border-left-color: #8b5cf6; }
+  
+  .step-4 .step-icon { background: linear-gradient(135deg, #ec4899, #be185d); }
+  .step-4 .step-content { border-left-color: #ec4899; }
+  
+  .step-5 .step-icon { background: linear-gradient(135deg, #f59e0b, #b45309); }
+  .step-5 .step-content { border-left-color: #f59e0b; }
+  
+  .step-6 .step-icon { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+  .step-6 .step-content { border-left-color: #ef4444; }
+  
+  .step-7 .step-icon { background: linear-gradient(135deg, #10b981, #047857); }
+  .step-7 .step-content { border-left-color: #10b981; }
+  
+  .critical-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #dc2626, #f97316);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: glow 2s ease-in-out infinite;
+    transition: transform 0.3s ease;
+  }
+  
+  .critical-badge:hover {
+    transform: scale(1.1);
+  }
+  
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(220, 38, 38, 0.4); }
+    50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.7); }
+  }
+  
+  .summary-box {
+    margin: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-radius: 16px;
+    border-left: 6px solid #f59e0b;
+    transition: all 0.3s ease;
+  }
+  
+  .summary-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(245, 158, 11, 0.25);
+  }
+  
+  .summary-box h3 {
+    color: #92400e;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+  
+  .summary-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .summary-box li {
+    padding: 8px 0;
+    color: #78350f;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    padding-left: 28px;
+    position: relative;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+  }
+  
+  .summary-box li:hover {
+    background: rgba(255, 255, 255, 0.4);
+    padding-left: 32px;
+    color: #451a03;
+  }
+  
+  .summary-box li::before {
+    content: '→';
+    position: absolute;
+    left: 4px;
+    color: #d97706;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .summary-box li:hover::before {
+    transform: translateX(4px);
+    color: #92400e;
+  }
+  
+  .footer {
+    background: #1a3a8e;
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  
+  .footer a {
+    color: #fbbf24;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .footer a:hover {
+    color: #fde68a;
+    border-bottom-color: #fde68a;
+  }
+  
+  .credit {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+  }
+  
+  .credit strong {
+    color: #fbbf24;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  
+  .credit-link {
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+  
+  .credit-link::after {
+    content: '↗';
+    margin-left: 4px;
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.3s ease;
+    color: #fbbf24;
+  }
+  
+  .credit-link:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .credit-link:hover strong {
+    color: #fde68a;
+    text-shadow: 0 0 12px rgba(253, 230, 138, 0.7);
+    letter-spacing: 1px;
+  }
+  
+  .credit:hover strong {
+    color: #fde68a;
+    text-shadow: 0 0 12px rgba(253, 230, 138, 0.6);
+  }
+  
+  .credit-sub {
+    font-size: 0.78rem;
+    opacity: 0.8;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  
+  .heart {
+    display: inline-block;
+    color: #f87171;
+    font-size: 1.1rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+  }
+  
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 30px 20px;
+    flex-wrap: wrap;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #4b5563;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+  
+  .legend-item:hover {
+    background: #f3f4f6;
+    color: #1a3a8e;
+    transform: translateY(-2px);
+  }
+  
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  
+  .legend-item:hover .legend-dot {
+    transform: scale(1.3);
+  }
+  
+  .legend-dot.action { background: #dc2626; }
+  .legend-dot.info { background: #3b82f6; }
+  .legend-dot.deadline { background: #f59e0b; }
+  
+  @media (max-width: 640px) {
+    .header h1 { font-size: 1.5rem; }
+    .timeline-wrapper { padding: 20px 15px; }
+    .timeline { padding-left: 40px; }
+    .step-icon { width: 40px; height: 40px; left: -38px; font-size: 1.2rem; }
+    .step-content { padding: 16px; }
+    .step-title { font-size: 1rem; }
+    .progress-bar { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="header">
+    <div class="flag-strip">
+      <span class="flag-saffron"></span>
+      <span class="flag-white">
+        <svg class="ashoka-chakra" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="22" fill="none" stroke="#000080" stroke-width="3"/>
+          <circle cx="50" cy="50" r="3" fill="#000080"/>
+          <g stroke="#000080" stroke-width="1.8" stroke-linecap="round">
+            <line x1="50" y1="28" x2="50" y2="72"/>
+            <line x1="28" y1="50" x2="72" y2="50"/>
+            <line x1="34.5" y1="34.5" x2="65.5" y2="65.5"/>
+            <line x1="65.5" y1="34.5" x2="34.5" y2="65.5"/>
+            <line x1="41" y1="29.5" x2="59" y2="70.5"/>
+            <line x1="59" y1="29.5" x2="41" y2="70.5"/>
+            <line x1="29.5" y1="41" x2="70.5" y2="59"/>
+            <line x1="29.5" y1="59" x2="70.5" y2="41"/>
+            <line x1="37" y1="31" x2="63" y2="69"/>
+            <line x1="63" y1="31" x2="37" y2="69"/>
+            <line x1="31" y1="37" x2="69" y2="63"/>
+            <line x1="31" y1="63" x2="69" y2="37"/>
+          </g>
+        </svg>
+      </span>
+      <span class="flag-green"></span>
+    </div>
+    <h1>🗳️ Maharashtra SIR 2026 Timeline</h1>
+    <div class="subtitle">Special Intensive Revision of Electoral Rolls (Phase 3)</div>
+    <div class="badge">📅 Announced by ECI on 14 May 2026</div>
+  </div>
+  
+  <div class="intro">
+    <h2>What is SIR and why does it matter?</h2>
+    <p>SIR is a special voter-roll verification exercise. BLOs will visit households and verify existing voters through pre-filled Enumeration Forms. Your details may be checked against the earlier electoral roll and family linkage records. If your record cannot be linked clearly, you may need to provide additional verification. This timeline explains what happens, when it happens, and what you should do.</p>
+  </div>
+  
+  <div class="timeline-wrapper">
+    
+    <div class="progress-bar">
+      <span class="progress-label">⏱️ Most important deadline coming up</span>
+      <span class="countdown" id="countdown">BLO visit window closes on 29 July 2026</span>
+    </div>
+    
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot info"></span>Preparation step</div>
+      <div class="legend-item"><span class="legend-dot action"></span>You must act</div>
+      <div class="legend-item"><span class="legend-dot deadline"></span>Key deadline</div>
+    </div>
+    
+    <div class="timeline">
+      
+      <div class="step step-1">
+        <div class="step-icon">1</div>
+        <div class="step-content">
+          <div class="step-header">
+            <div class="step-title">Qualifying Date</div>
+            <div class="step-date">1 October 2026</div>
+          </div>
+          <div class="step-description">
+            The reference date. Anyone who will be 18 or older on this date is eligible to be on the voter roll. Think of it as a snapshot moment used to decide who counts as a voter.
+          </div>
+          <div class="step-action">📌 No action needed. Just the rulebook date.</div>
+        </div>
+      </div>
+      
+      <div class="step step-2">
+        <div class="step-icon">2</div>
+        <div class="step-content">
+          <div class="step-header">
+            <div class="step-title">Training & Printing</div>
+            <div class="step-date">20 to 29 June 2026</div>
+          </div>
+          <div class="step-description">
+            BLOs (Booth Level Officers) get trained. Pre-filled enumeration forms are printed for every existing voter. This is behind-the-scenes work. Nothing visible to you yet.
+          </div>
+          <div class="step-action">⚙️ Government prep phase. Sit tight.</div>
+        </div>
+      </div>
+      
+      <div class="step step-3">
+        <div class="step-icon">3</div>
+        <div class="step-content">
+          <div class="step-header">
+            <div class="step-title">BLO Door-to-Door Visit <span class="critical-badge">⚠️ Critical</span></div>
+            <div class="step-date">30 June to 29 July 2026</div>
+          </div>
+          <div class="step-description">
+            BLOs visit households with pre-filled Enumeration Forms. Check your details carefully, sign where required, and return the form. This is the most important verification window, so keep your current EPIC, Aadhaar, address proof, and old voter records ready if available.
+          </div>
+          <div class="step-action critical">🚨 Be available. Verify details carefully. Keep documents ready.</div>
+        </div>
+      </div>
+      
+      <div class="step step-4">
+        <div class="step-icon">4</div>
+        <div class="step-content">
+          <div class="step-header">
+            <div class="step-title">Draft Electoral Roll Published</div>
+            <div class="step-date">5 August 2026</div>
+          </div>
+          <div class="step-description">
+            The first version of the new voter list comes out. Go check if your name is on it. If it's there with correct details, great. If not, you have one month to file an objection.
+          </div>
+          <div class="step-action">🔍 Check your name on <a href="https://voters.eci.gov.in" target="_blank" class="action-link">voters.eci.gov.in</a></div>
+        </div>
+      </div>
+      
+      <div class="step step-5">
+        <div class="step-icon">5</div>
+        <div class="step-content">
+          <div class="step-header">
+            <div class="step-title">Claims & Objections Window</div>
+            <div class="step-date">5 Aug to 4 Sept 2026</div>
+          </div>
+          <div class="step-description">
+            One-month window to fix errors. Wrong details? File Form 8. Name missing? File Form 6. Duplicate entry? Check with BLO/ERO and use Form 7 if deletion is required. This is your safety net if the BLO visit went wrong.
+          </div>
+          <div class="step-action">📝 File correction forms if needed</div>
+        </div>
+      </div>
+      
+      <div class="step step-6">
+        <div class="step-icon">6</div>
+        <div class="step-content">
+          <div class="step-header">
+            <div class="step-title">Hearings & Disposal</div>
+            <div class="step-date">5 Aug to 3 Oct 2026</div>
+          </div>
+          <div class="step-description">
+            ERO (Electoral Registration Officer) reviews objections, holds hearings if needed, and decides each case. If you filed something in Step 5, this is when it gets processed.
+          </div>
+          <div class="step-action">⚖️ Attend hearing if called</div>
+        </div>
+      </div>
+      
+      <div class="step step-7">
+        <div class="step-icon">7</div>
+        <div class="step-content">
+          <div class="step-header">
+            <div class="step-title">Final Electoral Roll Published 🎉</div>
+            <div class="step-date">7 October 2026</div>
+          </div>
+          <div class="step-description">
+            The final voter list is published. Check your name again. If your name is missing or wrongly changed, follow the appeal or correction route given by election authorities.
+          </div>
+          <div class="step-action done">✅ Final check. Save proof of your voter record</div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="summary-box">
+    <h3>📋 Quick Action Plan</h3>
+    <ul>
+      <li><strong>Now till end of June:</strong> Keep all documents ready (Aadhaar, current EPIC, old voter records, family proofs). Resolve any pending issues like duplicate entries.</li>
+      <li><strong>30 June to 29 July:</strong> When BLO visits, hand over signed EF for every family member. This is the make-or-break window.</li>
+      <li><strong>5 August:</strong> Check the draft roll. Make sure all family names appear correctly.</li>
+      <li><strong>Before 4 September:</strong> File any corrections through Form 6, 7, or 8 on <a href="https://voters.eci.gov.in" target="_blank" class="action-link">voters.eci.gov.in</a>.</li>
+      <li><strong>7 October:</strong> Verify on the final roll. Your name should be there, mapped to your current address.</li>
+      <li><strong>Always:</strong> Verify your own record on <a href="https://voters.eci.gov.in" target="_blank" class="action-link">voters.eci.gov.in</a> or through the <a href="https://play.google.com/store/apps/details?id=com.eci.citizen" target="_blank" class="action-link">Voter Helpline app</a> before filing any form.</li>
+    </ul>
+  </div>
+  
+  <div class="footer">
+    Source: Election Commission of India Press Note ECI/PN/086/2026 dated 14 May 2026. Maharashtra schedule under SIR Phase III.<br>
+    Verify your status anytime at <a href="https://voters.eci.gov.in" target="_blank">voters.eci.gov.in</a>
+    <div class="credit">
+      Crafted with <span class="heart">❤</span> by <a href="https://linkedin.com/in/aftabkhan89" target="_blank" class="credit-link"><strong>Aftab Khan</strong></a>
+      <div class="credit-sub">to help every Indian understand their voting rights</div>
+    </div>
+  </div>
+  
+</div>
+
+<script>
+  function updateCountdown() {
+    const deadline = new Date('2026-07-29');
+    const today = new Date();
+    const days = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+    const countdownEl = document.getElementById('countdown');
+    if (days > 0) {
+      countdownEl.textContent = `BLO visit window closes in ${days} days (29 July 2026)`;
+    } else if (days === 0) {
+      countdownEl.textContent = `BLO visit window closes today!`;
+    } else {
+      countdownEl.textContent = `BLO visit window has closed`;
+    }
+  }
+  updateCountdown();
+  
+  document.querySelectorAll('.step-content').forEach(step => {
+    step.addEventListener('click', function() {
+      this.style.transform = 'scale(0.98) translateY(-2px)';
+      setTimeout(() => {
+        this.style.transform = '';
+      }, 150);
+    });
+  });
+</script>
+</body>
+</html>
